@@ -24,8 +24,8 @@
   <body>
     <div class="container-fluid py-3 px-15">
          <center>
-             <h1>System Usability Scale (SUS) Score Calculator</h1>
-            <p>This page can be used to calulcate scores based upon the process originally devised by John Brooke [1]. A total score of 68 or higher is considered to be above average [2].</p>
+            <h1>System Usability Scale (SUS) Score Calculator</h1>
+            <p>This page can be used to calulcate scores based upon the process originally devised by John Brooke [1]. A total score of more than 68 or is considered to be above average [2]. In addition, scores are translated into grades (A, B, C, D, and F) and an approximation of the adjectives according to Bangor, Kortum and Miller [3].</p>
         </center>
          <!-- responsive two column layout -->
          <div class="row">
@@ -150,11 +150,11 @@
                 <tr>
                     <td>10. I needed to learn a lot of things before I could get going with this system.</td>
                     <td></td>
-                    <td><input type="radio" id="q10-1" name="sus-q10" value="1"></td>
-                    <td><input type="radio" id="q10-2" name="sus-q10" value="2"></td>
-                    <td><input type="radio" id="q10-3" name="sus-q10" value="3"></td>
-                    <td><input type="radio" id="q10-4" name="sus-q10" value="4"></td>
-                    <td><input type="radio" id="q10-5" name="sus-q10" value="5"></td>
+                    <td><input type="radio" id="q10" name="sus-q10" value="1"></td>
+                    <td><input type="radio" id="q10" name="sus-q10" value="2"></td>
+                    <td><input type="radio" id="q10" name="sus-q10" value="3"></td>
+                    <td><input type="radio" id="q10" name="sus-q10" value="4"></td>
+                    <td><input type="radio" id="q10" name="sus-q10" value="5"></td>
                     <td></td>
                 </tr>
                 
@@ -167,8 +167,8 @@
                 <div class="table-responsive">                    
                     
                     <!-- div with guidance notes -->
-                    <div id="guidance-card" class="card text-white bg-info mb-3" style="max-width: 100%;">
-                      <div class="card-header">Guidance</div>
+                    <div id="guidance-card" class="card text-white bg-info mb-3" style="max-width: 100%">
+                      <div class="card-header">Instructions</div>
                         <div class="card-body">
                             <p class="card-text">Enter your scores, per question, to calculate total SUS score.</p>
                             <p class="card-text">A score should be given for all questions.</p>
@@ -188,8 +188,10 @@
                     <div hidden id="outcome-card" class="card text-white bg-success mb-3" style="max-width: 100%;">
                       <div class="card-header">Result</div>
                         <div class="card-body">
-                            <h3>SUS Score: 000</h3>
-                            <p id="outcome-note" class="card-text">.....</p>
+                            <h3><div id="theScore"></div></h3>
+                            <p id="outcome-note" class="card-text"></p>
+                            <h4 id="outcome-grade" class="card-text"></h4>
+                            <h4 id="outcome-adjective" class="card-text"></h4>
                       </div>
                     </div>
 
@@ -198,43 +200,138 @@
             </div>
   </div>
      
-        
-    <h5>References</h5>
-        <p>[1]. Brooke, J. (1996). SUS-A quick and dirty usability scale. <i>Usability evaluation in industry</i>, 189(194), 4-7.</p>
-        <p>[2]. Sauro, J. (2011). SUStisfied? Little-known System Usability Scale facts. <i>User Experience: The Magazine of the User Experience Professionals Association</i>, 10(3). Available from: <a href="http://uxpamagazine.org/sustified/">http://uxpamagazine.org/sustified/</a>. [Last accessed: 9 March 2020].</p>
+        <!-- references for the page-->
+        <table id="refs" class="table">
+            <tr><th colspan="2">References</th></tr>
+            
+            <tr><td>[1]</td><td>Brooke, J. (1996). SUS-A quick and dirty usability scale. <i>Usability evaluation in industry</i>, 189(194), 4-7.</td></tr>
+
+            <tr><td>[2]</td><td>Sauro, J. (2011). SUStisfied? Little-known System Usability Scale facts. <i>User Experience: The Magazine of the User Experience Professionals Association</i>, 10(3). Available from: <a href="http://uxpamagazine.org/sustified/">http://uxpamagazine.org/sustified/</a>. [Last accessed: 9 March 2020].</td></tr>
+
+            <tr><td>[3]</td><td>Bangor, A., Kortum, P. and Miller, J. (2009). Determining what individual SUS scores mean: Adding an adjective rating scale. <i>Journal of usability studies</i>, 4(3), 114-123.</td></tr>    
+        </table>
     </div>
     
       
       
+      
+      
     <!-- JS for the calculation / adjustments -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script> 
-        // get question values and put in responses array
-        var responses = new Array(10);
-        for (i = 0; i < responses.length; i++) { 
-            responses[i] = getval($('#sus-q'+i).val());
-            console.log(responses[i]);
-            console.log("hello");
-        }
+    <script>
         
+        $(document).ready(function() {
         
         // calculate SUS score function
-        function calculateSUS(responses) {
-
+        function calculateSUS() {
+            // get question values and put in responses array
+            var responses = new Array(10);
+            for (i = 0; i < responses.length; i++) { 
+                //responses[i] = $('#q10').val();
+                responses[i]=parseInt($("input:radio[name ='sus-q"+(i+1)+"']:checked").val());
+            }
+            
+            // calculate adjusted sum of scores for odd numbered questions
+            var sum1=(responses[0]+responses[2]+responses[4]+responses[6]+responses[8])-5;
+            // calculate adjusted sum of scores for even numbered questions
+            var sum2=25-(responses[1]+responses[3]+responses[5]+responses[7]+responses[9]);
+            // calculate and return total SUS score
+            return Math.ceil((sum1+sum2)*2.5);
+            
         }
         
-        // getVal function - checks value is present
-        function getval(input) {
-            if (input ==  '') { 
-                return null; 
+        // Calculate SUS score when input changes
+        $('input').on('input', function() {
+            var sus = calculateSUS();
+            
+            // check to see if the SUS score is NaN (i.e. not all questions have scores)
+            if (Number.isNaN(sus)==false) {
+                
+                    // change colour of card depending upon SUS score value - over 68
+                    if (sus>68) {
+                        $("#outcome-card").attr("class", "card text-white bg-success mb-3");
+                        $("#outcome-note").html("By conventional standards a score of "+sus+" is considered to be <b>above average</b>.")
+                    }
+                
+                    // SUS score is 68 or less
+                    else {
+                        $("#outcome-card").attr("class", "card text-white bg-danger mb-3");
+                            // SUS score is exactly 68
+                            if (sus==68) {
+                                $("#outcome-note").html("By conventional standards a score of "+sus+" is considered <b>to be average</b>.")
+                            }
+                            // SUS score is less than 68
+                            else {
+                                $("#outcome-note").html("By conventional standards a score of "+sus+" is considered to be <b>below average</b>.")
+                            }
+                    }
+                
+                // display a grade for the score
+                if (sus <61) {
+                    $("#outcome-grade").html("This score is considered a Grade F.");
+                }
+                
+                else if (sus<71) {
+                    $("#outcome-grade").html("This score is considered a Grade D.");    
+                }
+                                
+                else if (sus<81) {
+                    $("#outcome-grade").html("This score is considered a Grade C.");    
+                }
+                
+                else if (sus<91) {
+                    $("#outcome-grade").html("This score is considered a Grade B.");    
+                }
+                
+                else {
+                    $("#outcome-grade").html("This score is considered a Grade A.");    
+                }
+                
+                
+                // display an adjective for this grade
+                if (sus <21) {
+                    $("#outcome-adjective").html("This score may be described as <i>worst imaginable</i>.");
+                }
+                
+                else if (sus<36) {
+                    $("#outcome-adjective").html("This score may be described as <i>awful</i>.");   
+                }
+                
+                else if (sus<51) {
+                    $("#outcome-adjective").html("This score may be described as <i>poor</i>.");   
+                }
+                                
+                else if (sus<72) {
+                    $("#outcome-adjective").html("This score may be described as <i>ok</i>.");   
+                }
+                
+                else if (sus<86) {
+                    $("#outcome-adjective").html("This score may be described as <i>good</i>.");   
+                }
+                
+                else if (sus<91) {
+                    $("#outcome-adjective").html("This score may be described as <i>excellent</i>.");   
+                }
+                
+                else {
+                    $("#outcome-adjective").html("This score may be described as <i>best imaginable</i>.");    
+                }
+                
+                // show and hide cards as required
+                $("#warning-card").attr("hidden","true");
+                $("#theScore").html("SUS Score: "+sus);
+                $("#outcome-card").removeAttr("hidden");
             }
-            else if (isNaN(parseInt(input))) {
-                return null; 
+            
+            // SUS score is not valid - display warning
+            else {
+                console.log("Validate SUS score is NaN");
+                $("#warning-card").removeAttr("hidden");
             }
-            else { 
-                return parseInt(input); 
-            }
-        }
+            console.log("SUS score is: "+sus);
+        });
+            
+        });
       
     </script>  
       
