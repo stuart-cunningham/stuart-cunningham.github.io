@@ -24,8 +24,8 @@
   <body>
     <div class="container-fluid py-3 px-15">
          <center>
-            <h1>System Usability Scale (SUS) Score Calculator</h1>
-            <p>This page can be used to calulcate scores based upon the process originally devised by John Brooke [1]. A total score of more than 68 or is considered to be above average [2]. In addition, scores are translated into grades (A, B, C, D, and F) and an approximation of the adjectives according to Bangor, Kortum and Miller [3].</p>
+            <h2>System Usability Scale (SUS) Score Calculator</h2>
+            <p>This page can be used to calulcate scores based upon the process originally devised by John Brooke [1]. A total score of more than 68 considered to be above average [2]. In addition, scores are translated into grades (A, B, C, D, and F) and an approximation of the adjectives specified by the work of Bangor, Kortum and Miller [3].</p>
         </center>
          <!-- responsive two column layout -->
          <div class="row">
@@ -204,11 +204,11 @@
         <table id="refs" class="table">
             <tr><th colspan="2">References</th></tr>
             
-            <tr><td>[1]</td><td>Brooke, J. (1996). SUS-A quick and dirty usability scale. <i>Usability evaluation in industry</i>, 189(194), 4-7.</td></tr>
+            <tr><td>[1]</td><td>Brooke, J. (1996). <a href="https://books.google.co.uk/books?id=IfUsRmzAqvEC&lpg=PA189&ots=GaqvH8nq1p&lr&pg=PA189#v=onepage&q&f=false">SUS-A quick and dirty usability scale</a>. <i>Usability evaluation in industry</i>, 189(194), 4-7.</td></tr>
 
-            <tr><td>[2]</td><td>Sauro, J. (2011). SUStisfied? Little-known System Usability Scale facts. <i>User Experience: The Magazine of the User Experience Professionals Association</i>, 10(3). Available from: <a href="http://uxpamagazine.org/sustified/">http://uxpamagazine.org/sustified/</a>. [Last accessed: 9 March 2020].</td></tr>
+            <tr><td>[2]</td><td>Sauro, J. (2011). <a href="http://uxpamagazine.org/sustified/">SUStisfied? Little-known System Usability Scale facts.</a> <i>User Experience: The Magazine of the User Experience Professionals Association</i>, 10(3). [Last accessed: 9 March 2020].</td></tr>
 
-            <tr><td>[3]</td><td>Bangor, A., Kortum, P. and Miller, J. (2009). Determining what individual SUS scores mean: Adding an adjective rating scale. <i>Journal of usability studies</i>, 4(3), 114-123.</td></tr>    
+            <tr><td>[3]</td><td>Bangor, A., Kortum, P. and Miller, J. (2009). <a href="https://dl.acm.org/doi/10.5555/2835587.2835589">Determining what individual SUS scores mean: Adding an adjective rating scale</a>. <i>Journal of usability studies</i>, 4(3), 114-123.</td></tr>    
         </table>
     </div>
     
@@ -236,7 +236,8 @@
             // calculate adjusted sum of scores for even numbered questions
             var sum2=25-(responses[1]+responses[3]+responses[5]+responses[7]+responses[9]);
             // calculate and return total SUS score
-            return Math.ceil((sum1+sum2)*2.5);
+            //return Math.ceil((sum1+sum2)*2.5);
+            return (sum1+sum2)*2.5;
             
         }
         
