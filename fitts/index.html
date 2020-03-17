@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Include meta information, set viewport defaults, load CSS sheet -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+       
+      <!-- add this nice theme https://bootswatch.com/flatly/ -->
+      <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF" crossorigin="anonymous" id="css-link">
+    
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+       
+       <!-- import MathJax to make the formulae look pretty -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+       
+       <title>Fitts' Law Calculator</title>
+  </head>
+  
+  
+  <body>
+    <div class="container-fluid py-3 px-15">
+         <center>
+            <h2>Fitts' Law Calculator</h2>
+             <p>This page can be used to make calculations using Fitts' Law [1] resulting in a Movement Time <i>MT</i>. The calculator offers several formulations, as explained by MacKenzie [2], including Fitts, Welford and Shannon. For two-dimensional movement, MacKenzie and Buxton [3] showed that the Shannon formulation alleviates errors and that either the smaller of the two target dimensions, or the width of the target along the approach vector of the target, should be used for size <i>S</i>.</p>
+        </center>
+         <!-- responsive three column layout -->
+         <div class="row">
+         
+            <!-- form1 div -->
+            <div id="left-col" class="col-md-3">
+                <form id="form1">
+                    <!-- LIST options for the calculation -->
+                    <b>Select formulation:</b>
+                    <ul id="formula-options" class="list-group">
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="calc-fitts" value="fitts" name="calculation" class="custom-control-input">
+                                <label class="custom-control-label" for="calc-fitts">Fitts</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="calc-welford" value="welford" name="calculation" class="custom-control-input">
+                                <label class="custom-control-label" for="calc-welford">Welford</label>
+                            </div>
+                        </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="calc-shannon" value="shannon" name="calculation" class="custom-control-input">
+                                <label class="custom-control-label" for="calc-shannon">Shannon</label>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+                
+                <div style="margin-top: 10px;">
+                    <!-- the formula selected will be displayed here -->
+                   <center><h5 id="showFormula">
+                        <p id="formula-fitts" hidden>\(MT=k \cdot log _{2} \displaystyle (\frac{2D}{S}) \)</p>
+                        <p id="formula-welford" hidden>\(MT=k \cdot log _{2} \displaystyle (\frac{D}{S}+0.5) \)</p>
+                       <p id="formula-shannon" hidden>\(MT=k \cdot log _{2} \displaystyle (\frac{D}{S}+1) \)</p>
+                    </h5></center>
+                </div>
+            </div>
+             
+            <!-- form 2 div --> 
+             <div id="middle-col" class="col-md-5">
+                <form id="form2">
+                    <b>Enter values:</b>
+
+                    <div class="form-group">                
+                        
+                        <label class="col-form-label" for="inputDefault">Time coefficient (<i>k</i>)</label>
+                        <input type="number" min="0" class="form-control" placeholder="Enter a value for k" id="inputK" required>
+                        
+                        <label class="col-form-label" for="inputDefault">Distance between current position and target (<i>D</i>)</label>
+                        <input type="number" min="0" class="form-control" placeholder="Enter a value for D" id="inputD" required>
+                        
+                        <label class="col-form-label" for="inputDefault">Size of target (<i>S</i>)</label>
+                        <input type="number" min="0" class="form-control" placeholder="Enter a value for S" id="inputS" required>
+                        <!-- button for calculation -->
+                        <div style="margin-top: 10px;">
+                            <button type="button" id="calcButton" class="btn btn-primary">Calculate</button>
+                        </div>
+                    </div>
+                    
+                </form>   
+            </div>
+            
+            <!-- info div --> 
+            <div id="right-col" class="col-md-4">
+                    
+                    <!-- wrap a Dark Mode toggle switch inside a couple of HRs -->
+                    <hr>
+                    <!-- div with CSS toggle switch -->
+                    <div style="margin-left: 3px;" class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="css-mode" >
+                            <label class="custom-control-label" for="css-mode"><b>Dark Mode</b></label>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <!-- div with guidance notes -->
+                    <div id="guidance-card" class="card text-white bg-info mb-3" style="max-width: 100%">
+                      <div class="card-header">Instructions</div>
+                        <div class="card-body">
+                            <p class="card-text">Choose the Fitts Law forumation you wish to use.</p>
+                            <p class="card-text">Enter values for time coefficient, distance between source and target, and size of target.</p><p class="card-text">Click the Calculate button to find Movement Time.</p>
+                      </div>
+                    </div>
+                    
+                    <!-- div with warning information -->
+                    <div hidden id="warning-card" class="card text-white bg-warning mb-3" style="max-width: 100%;">
+                      <div class="card-header">Warning</div>
+                        <div class="card-body">
+                            <p id="alert-text" class="card-text">You need to enter a response to each question.</p>
+                      </div>
+                    </div>
+                    
+                    <!-- div with outcome information -->
+                    <div hidden id="outcome-card" class="card text-white bg-success mb-3" style="max-width: 100%;">
+                      <div class="card-header">Result</div>
+                        <div class="card-body">
+                            <h4><div id="theScore"></div></h4>
+                            <p id="outcome-note" class="card-text"></p>
+                      </div>
+                    </div>
+                
+            </div>
+  </div>
+     
+        <!-- references for the page-->
+        <table id="refs" class="table">
+            <tr><th colspan="2">References</th></tr>
+            
+            <tr><td>[1]</td><td>Fitts, P. M. (1954). <a href="https://psycnet.apa.org/record/1955-02059-001">The information capacity of the human motor system in controlling the amplitude of movement</a>. <i>Journal of experimental psychology</i>, 47(6), 381.</td></tr>
+
+            <tr><td>[2]</td><td>MacKenzie, I. S. (2018). <a href="https://www.yorku.ca/mack/hhci2018.html">Fitts’ law</a>. <i>Handbook of human-computer interaction</i>, 1, 349-370.</td></tr>
+            
+            <tr><td>[3]</td><td>MacKenzie, I. S., and Buxton, W. (1992). <a href="https://www.yorku.ca/mack/CHI92.html">Extending Fitts' law to two-dimensional tasks</a>. In <i>Proceedings of the SIGCHI conference on Human factors in computing systems</i> (pp. 219-226).</td></tr>
+            
+        </table>
+        
+        
+        <!-- author info -->
+        <center>
+            <span class="badge badge-light">Created by <a href="https://twitter.com/stuartaffect">@StuartAffect</a> - 2020.</span>
+        </center>
+        
+    </div>
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <!-- /////// -->  
+    <!-- JS for the calculation / adjustments -->
+    <!-- /////// -->  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        
+    $(document).ready(function() {
+        
+        //
+        // calculate fitts law value function
+        //
+        function calculateFitts(k,d,s,version) {
+            
+            // calculate using Fitts
+            if (version=="fitts") {
+                score=k*Math.log2((2*d/s));
+            }
+            // calculate using Welford
+            else if (version=="welford") {
+                score=k*Math.log2((d/s)+0.5);
+            }
+            // calculate using Shannon
+            else if (version=="shannon") {
+                score=k*Math.log2((d/s)+1);
+            }
+            else {
+                score=NaN;
+                console.log("Something went wrong - invalid calculation method");
+            }
+
+            score=score.toFixed(3);
+            console.log(version+" score is "+score);
+            return score;
+        }
+        
+        
+        
+        //
+        // clear any value highlighting on input fields
+        //
+        function clearValueErrors() {
+            $("#inputK").attr("class","form-control");
+            $("#inputD").attr("class","form-control");
+            $("#inputS").attr("class","form-control");
+        }
+    
+        
+        
+        //   
+        // display the result function
+        //
+        function displayFitts(result) {              
+            clearValueErrors();
+            $("#outcome-card").attr("class", "card text-white bg-success mb-3");
+            // show and hide cards as required
+            $("#warning-card").attr("hidden","true");
+            $("#theScore").html("Movement Time (<i>MT</i>): "+result);
+            $("#outcome-card").removeAttr("hidden");
+        }    
+        
+        
+        
+        //
+        // Dark Mode Toggle
+        //
+        function toggleCSS(cssMode) {
+            // set the CSS link to Darkly
+            if (cssMode) {
+                // change the link and integrity check to Darkly
+                $("#css-link").attr("integrity","sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm");
+                $("#css-link").attr("href","https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css");
+                // dark div background colour
+                $("#left-col").removeAttr("style");
+                // add a clearer table style in this mode
+                $("#sus-tab").attr("class","table table-striped");
+            }
+            // set the CSS link to Flatly
+            else {
+                // change the link and integrity check to Flatly
+                $("#css-link").attr("integrity","sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF");
+                $("#css-link").attr("href","https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css"); 
+                // original div background colour
+                $("#left-col").attr("style","background-color:white;");
+                // original table style in this mode
+                $("#sus-tab").attr("class","table table-striped");
+            }
+        }
+            
+        
+        
+        //
+        // calculate Fitts when button is pressed
+        //
+        $("#calcButton").on('click', function() {
+
+            // get values            
+            var k=parseFloat($("#inputK").val());
+            var d=parseFloat($("#inputD").val());
+            var s=parseFloat($("#inputS").val());
+            
+            // get calculation method
+            version=$("input[name='calculation']:checked").val();
+            
+            // check all required values are set
+             
+            if (version==undefined || Number.isNaN(k)==true || Number.isNaN(d)==true || Number.isNaN(s)==true)
+                {
+                // set-up for presenting an error message
+                console.log("No method selected");
+                // show and explain via warning card
+                // remove other, unused cards and info
+                $("#outcome-card").attr("hidden","true");
+                $("#alert-text").html("");
+                clearValueErrors();
+                $("#warning-card").removeAttr("hidden");
+                    
+                    
+                // display messages depending upon what is missing
+                if (version==undefined) {
+                    $("#alert-text").append("A formulation method must be selected.<br>");
+                }
+            
+                if (Number.isNaN(k)==true) {
+                    $("#alert-text").append("A time coefficient value (<i>k</i>) is missing.<br>");
+                    $("#inputK").attr("class","form-control is-invalid");
+                }
+                
+                if (Number.isNaN(d)==true) {
+                    $("#alert-text").append("A distance value (<i>D</i>) is missing.<br>");
+                    $("#inputD").attr("class","form-control is-invalid");
+                }
+                
+                if (Number.isNaN(s)==true) {
+                    $("#alert-text").append("A size of target value (<i>S</i>) is missing.<br>");
+                    $("#inputS").attr("class","form-control is-invalid");
+                }
+                
+             }
+            else {
+                // hide any visible warning messages
+                $("#warning-card").attr("hidden","true");
+                $("#alert-text").html("");
+                var result = calculateFitts(k,d,s,version);
+                displayFitts(result);
+            }
+            
+        });
+        
+        
+        
+        
+        //
+        // detect selection of calculation and display formula
+        //
+        $( "input[type=radio]" ).on("click", function() {
+            var version = $("input[name='calculation']:checked").val();
+            
+            // hide any currently shown formulas
+            $("#formula-fitts").attr("hidden","true");
+            $("#formula-welford").attr("hidden","true");
+            $("#formula-shannon").attr("hidden","true");
+                    
+            // calculate using Fitts - show formula
+            if (version=="fitts") {
+                $("#formula-fitts").removeAttr("hidden");
+            }
+            // calculate using Welford - show formula
+            else if (version=="welford") {
+                $("#formula-welford").removeAttr("hidden");
+            }
+            // calculate using Shannon - show formula
+            else if (version=="shannon") {
+                $("#formula-shannon").removeAttr("hidden");
+            }
+        });
+        
+        
+        
+        
+        //
+        // detect toggle of the 'Dark Mode' switch - a checkbox that is styled
+        //
+        $( "input[type=checkbox]" ).on("click", function() {
+            var cssMode = document.getElementById("css-mode").checked;
+            toggleCSS(cssMode);
+        });
+        
+        
+    });
+      
+    </script>  
+      
+  </body>
+    
+</html>
