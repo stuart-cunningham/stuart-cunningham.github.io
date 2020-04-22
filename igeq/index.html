@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <style>
+        .response {text-align: center;}
+    </style>
+    
+    
+   <head>
+      <!-- Include meta information, set viewport defaults, load CSS sheet -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+       
+      <!-- add this nice theme https://bootswatch.com/flatly/ -->
+      <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF" crossorigin="anonymous" id="css-link">
+    
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+       
+       <title>In-Game GEQ (Game Experience Questionnaire) Score Calculator</title>
+  </head>
+  
+  
+  <body>
+    <div class="container-fluid py-3 px-15">
+             <center>
+                <h2>In-Game GEQ (Game Experience Questionnaire) Score Calculator</h2>
+                 <p>This page can be used to calculate scores for the I-GEQ devised by IJsselsteijn <i>et al.</i>, who explain that it  was created <i>"...for assessing game experience at multiple intervals during a game session, or play-back
+                     session"</i> [1]. Average scores are produced for each of the seven components. The greater the score in each component, the greater the manifestation of that component in the player's experience.</p>
+            </center> 
+            
+         <!-- responsive two column layout -->
+         <div class="row">
+         
+            <!-- form div -->
+            <div id="left-col" class="col-md-8" style="background-color:white;">
+            <form id="sus-form">
+                   
+            <!-- i-GEQ QUESTIONS TABLE -->
+            <table border="0" id="igeq-tab" class="table table-striped">
+                <tr><th>Please indicate how you felt while playing the game for each of the items, on the following scale:</th><th class="response">Not at all<br>0</th><th class="response">Slightly<br>1</th><th class="response">Moderately<br>2</th><th class="response">Fairly<br>3</th><th class="response">Extremely<br>4</th></tr>
+                
+                <!-- QUESTION 1-->
+                <tr>
+                    <td>1. I was interested in the game's story</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q1-1" name="igeq-q1" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q1-2" name="igeq-q1" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q1-3" name="igeq-q1" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q1-4" name="igeq-q1" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q1-5" name="igeq-q1" value="4"></td>
+                </tr>
+
+                <!-- QUESTION 2-->
+                <tr>
+                    <td>2. I felt successful</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q2-1" name="igeq-q2" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q2-2" name="igeq-q2" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q2-3" name="igeq-q2" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q2-4" name="igeq-q2" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q2-5" name="igeq-q2" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 3-->
+                <tr>
+                    <td>3. I felt bored</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q3-1" name="igeq-q3" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q3-2" name="igeq-q3" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q3-3" name="igeq-q3" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q3-4" name="igeq-q3" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q3-5" name="igeq-q3" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 4-->
+                <tr>
+                    <td>4. I found it impressive</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q4-1" name="igeq-q4" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q4-2" name="igeq-q4" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q4-3" name="igeq-q4" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q4-4" name="igeq-q4" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q4-5" name="igeq-q4" value="4"></td>
+                </tr>
+                
+                 <!-- QUESTION 5-->
+                <tr>
+                    <td>5. I forgot everything around me</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q5-1" name="igeq-q5" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q5-2" name="igeq-q5" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q5-3" name="igeq-q5" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q5-4" name="igeq-q5" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q5-5" name="igeq-q5" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 6-->
+                <tr>
+                    <td>6. I felt frustrated</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q6-1" name="igeq-q6" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q6-2" name="igeq-q6" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q6-3" name="igeq-q6" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q6-4" name="igeq-q6" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q6-5" name="igeq-q6" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 7-->
+                <tr>
+                    <td>7. I found it tiresome</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q7-1" name="igeq-q7" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q7-2" name="igeq-q7" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q7-3" name="igeq-q7" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q7-4" name="igeq-q7" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q7-5" name="igeq-q7" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 8-->
+                <tr>
+                    <td>8. I felt irritable</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q8-1" name="igeq-q8" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q8-2" name="igeq-q8" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q8-3" name="igeq-q8" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q8-4" name="igeq-q8" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q8-5" name="igeq-q8" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 9-->
+                <tr>
+                    <td>9. I felt skilful</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q9-1" name="igeq-q9" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q9-2" name="igeq-q9" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q9-3" name="igeq-q9" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q9-4" name="igeq-q9" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q9-5" name="igeq-q9" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 10-->
+                <tr>
+                    <td>10. I felt completely absorbed</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q10-1" name="igeq-q10" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q10-2" name="igeq-q10" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q10-3" name="igeq-q10" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q10-4" name="igeq-q10" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q10-5" name="igeq-q10" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 11-->
+                <tr>
+                    <td>11. I felt content</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q11-1" name="igeq-q11" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q11-2" name="igeq-q11" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q11-3" name="igeq-q11" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q11-4" name="igeq-q11" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q11-5" name="igeq-q11" value="4"></td>
+                </tr>
+                        
+                <!-- QUESTION 12-->        
+                <tr>
+                    <td>12. I felt challenged</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q12-1" name="igeq-q12" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q12-2" name="igeq-q12" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q12-3" name="igeq-q12" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q12-4" name="igeq-q12" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q12-5" name="igeq-q12" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 13-->
+                <tr>
+                    <td>13. I had to put a lot of effort into it</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q13-1" name="igeq-q13" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q13-2" name="igeq-q13" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q13-3" name="igeq-q13" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q13-4" name="igeq-q13" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q13-5" name="igeq-q13" value="4"></td>
+                </tr>
+                
+                <!-- QUESTION 14-->    
+                <tr>
+                    <td>14. I felt good</td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q14-1" name="igeq-q14" value="0"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q14-2" name="igeq-q14" value="1"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q14-3" name="igeq-q14" value="2"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q14-4" name="igeq-q14" value="3"></td>
+                    <td class="response"><input autocomplete="off" type="radio" id="q14-5" name="igeq-q14" value="4"></td>
+                </tr>
+                
+            </table>   
+        </form>   
+    </div>
+            
+            <!-- info div --> 
+            <div id="right-col" class="col-md-4">
+                    
+                    <!-- wrap a Dark Mode toggle switch inside a couple of HRs -->
+                    <hr>
+                    <!-- div with CSS toggle switch -->
+                    <div style="margin-left: 3px;" class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="css-mode" >
+                            <label class="custom-control-label" for="css-mode"><b>Dark Mode</b></label>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <!-- div with guidance notes -->
+                    <div id="guidance-card" class="card text-white bg-info mb-3" style="max-width: 100%">
+                      <div class="card-header">Instructions</div>
+                        <div class="card-body">
+                            <p class="card-text">Enter your ratings, per question, to calculate the I-GEQ component scores. A rating should be given for all questions.</p>
+                      </div>
+                    </div>
+                    
+                    <!-- div with warning information -->
+                    <div hidden id="warning-card" class="card text-white bg-warning mb-3" style="max-width: 100%;">
+                      <div class="card-header">Warning</div>
+                        <div class="card-body">
+                            <p id="alert-text" class="card-text">You need to enter a rating for each question.</p>
+                      </div>
+                    </div>
+                    
+                    <!-- div with outcome information -->
+                    <div hidden id="outcome-card" class="card text-white bg-success mb-3" style="max-width: 100%;">
+                      <div class="card-header">Result</div>
+                        <div class="card-body">
+                            <h3><div id="theScore"></div></h3>
+                            <p id="outcome-note" class="card-text"></p>
+                            <h5 id="outcome-grade" class="card-text"></h5>
+                            <h5 id="outcome-adjective" class="card-text"></h5>
+                      </div>
+                    </div>
+                
+            </div>
+  </div>
+     
+        <!-- references for the page-->
+        <table id="refs" class="table">
+            <tr><th colspan="2">References</th></tr>
+            <tr><td>[1]</td><td>IJsselsteijn, W. A., De Kort, Y. A. W., and Poels, K. (2013). <a href="https://pure.tue.nl/ws/files/21666907/Game_Experience_Questionnaire_English.pdf">The game experience questionnaire</a>. Eindhoven: Technische Universiteit Eindhoven, 3-9.</td></tr>    
+        </table>
+        
+        
+        <!-- author info -->
+        <center>
+            <span class="badge badge-light">Created by <a href="https://twitter.com/stuartaffect">@StuartAffect</a> - 2020.</span>
+        </center>
+        
+    </div>
+    
+      
+      
+      
+      
+    <!-- JS for the calculation / adjustments -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        
+    $(document).ready(function() {
+        
+        // calculate GEQ scores function
+        function calculateGEQ() {
+            // setup an array to hold component scores
+            var components = new Array(7);
+            
+            // get question values and put in responses array
+            var responses = new Array(14);
+            for (i = 0; i < responses.length; i++) { 
+                responses[i]=parseInt($("input:radio[name ='igeq-q"+(i+1)+"']:checked").val());
+            }
+            
+            // Competence: Items 2 and 9
+            components[0] = (responses[1]+responses[8])/2;
+            // Sensory and Imaginative Immersion: Items 1 and 4
+            components[1] = (responses[0]+responses[3])/2;
+            // Flow: Items 5 and 10
+            components[2] = (responses[4]+responses[9])/2;
+            // Tension: Items 6 and 8
+            components[3] = (responses[5]+responses[7])/2;
+            // Challenge: Items 12 and 13
+            components[4] = (responses[11]+responses[12])/2;
+            // Negative affect: Items 3 and 7
+            components[5] = (responses[2]+responses[6])/2;
+            // Positive affect: Items 11 and 14
+            components[6] = (responses[10]+responses[13])/2;
+            
+            // Return component scores array
+            return components;
+            
+        }
+           
+        // display the SUS function
+        function displayGEQ(components) {
+              // check to see if the GEQ scores are NaN (i.e. not all questions have scores)
+            missingValue = false;
+            for (i=0; i< components.length; i++) {
+                // check elements for presence of NaN
+                if (Number.isNaN(components[i])) {
+                    missingValue=true;
+                    console.log("NaN found at idx "+i);
+                }
+            }
+            
+            if (missingValue==false) {
+
+                $("#outcome-card").attr("class", "card text-white bg-success mb-3");
+                                
+                // show and hide cards as required
+                $("#warning-card").attr("hidden","true");
+                $("#theScore").html("I-GEQ Scores");
+                
+                $("#outcome-note").html("<b>Competence:</b> "+components[0]+"<br><b>Sensory and Imaginative Immersion</b>: "+components[1]+"<br><b>Flow:</b> "+components[2]+"<br><b>Tension:</b> "+components[3]+"<br><b>Challenge:</b> "+components[4]+"<br><b>Negative affect:</b> "+components[5]+"<br><b>Positive affect:</b> "+components[6]);
+                
+                $("#outcome-card").removeAttr("hidden");
+            }
+            
+            // SUS score is not valid - display warning
+            else {
+                $("#warning-card").removeAttr("hidden");
+            }
+        
+        }    
+        
+        function toggleCSS(cssMode) {
+            
+            // set the CSS link to Darkly
+            if (cssMode) {
+                // change the link and integrity check to Darkly
+                $("#css-link").attr("integrity","sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm");
+                $("#css-link").attr("href","https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css");
+                // dark div background colour
+                $("#left-col").removeAttr("style");
+                // add a clearer table style in this mode
+                $("#sus-tab").attr("class","table table-striped");
+            }
+            // set the CSS link to Flatly
+            else {
+                // change the link and integrity check to Flatly
+                $("#css-link").attr("integrity","sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF");
+                $("#css-link").attr("href","https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css"); 
+                // original div background colour
+                $("#left-col").attr("style","background-color:white;");
+                // original table style in this mode
+                $("#sus-tab").attr("class","table table-striped");
+            }
+        }
+            
+        
+        // calculate SUS score when input changes
+        $('input[type=radio]').on('input', function() {
+            var components = calculateGEQ();
+            displayGEQ(components);
+        });
+        
+        
+        
+        // detect toggle of the 'Dark Mode' switch - a checkbox that is styled
+        $( "input[type=checkbox]" ).on("click", function() {
+            var cssMode = document.getElementById("css-mode").checked;
+            toggleCSS(cssMode);
+        });
+        
+        
+        // calculate when page first (re)loads
+        var sus = calculateGEQ();
+        
+    });
+      
+    </script>  
+      
+  </body>
+  
+</html>
