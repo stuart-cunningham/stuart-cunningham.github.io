@@ -40,7 +40,7 @@
          
             <!-- form div -->
             <div id="left-col" class="col-md-8" style="background-color:white;">
-            <form id="sus-form">
+            <form id="igeq-form">
                    
             <!-- i-GEQ QUESTIONS TABLE -->
             <table border="0" id="igeq-tab" class="table table-striped">
@@ -289,7 +289,7 @@
             
         }
            
-        // display the SUS function
+        // display the GEQ function
         function displayGEQ(components) {
               // check to see if the GEQ scores are NaN (i.e. not all questions have scores)
             missingValue = false;
@@ -314,7 +314,7 @@
                 $("#outcome-card").removeAttr("hidden");
             }
             
-            // SUS score is not valid - display warning
+            // GEQ score is not valid - display warning
             else {
                 $("#warning-card").removeAttr("hidden");
             }
@@ -331,7 +331,7 @@
                 // dark div background colour
                 $("#left-col").removeAttr("style");
                 // add a clearer table style in this mode
-                $("#sus-tab").attr("class","table table-striped");
+                $("#igeq-tab").attr("class","table table-striped");
             }
             // set the CSS link to Flatly
             else {
@@ -341,12 +341,12 @@
                 // original div background colour
                 $("#left-col").attr("style","background-color:white;");
                 // original table style in this mode
-                $("#sus-tab").attr("class","table table-striped");
+                $("#igeq-tab").attr("class","table table-striped");
             }
         }
             
         
-        // calculate SUS score when input changes
+        // calculate GEQ components score when input changes
         $('input[type=radio]').on('input', function() {
             var components = calculateGEQ();
             displayGEQ(components);
@@ -362,7 +362,7 @@
         
         
         // calculate when page first (re)loads
-        var sus = calculateGEQ();
+        var components = calculateGEQ();
         
     });
       
